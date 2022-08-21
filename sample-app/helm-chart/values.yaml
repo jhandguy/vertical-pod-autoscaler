@@ -1,0 +1,23 @@
+replicas: 3
+resources:
+  limits:
+    cpu: 10m
+    memory: 20Mi
+  requests:
+    cpu: 10m
+    memory: 20Mi
+verticalPodAutoscaler:
+  controlledResources:
+    maxAllowed:
+      cpu: 100m
+      memory: 200Mi
+    minAllowed:
+      cpu: 10m
+      memory: 20Mi
+image:
+  registry: ghcr.io
+  repository: jhandguy/vertical-pod-autoscaler/sample-app
+  tag: 1.0.0
+podDisruptionBudget:
+  enabled: false
+  maxUnavailable: 1
