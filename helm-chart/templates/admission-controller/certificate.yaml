@@ -1,0 +1,12 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Release.Name }}-admission-controller
+  namespace: {{ .Release.Namespace }}
+spec:
+  secretName: {{ .Release.Name }}-admission-controller-tls
+  dnsNames:
+    - {{ .Release.Name }}-admission-controller.{{ .Release.Namespace }}.svc
+  issuerRef:
+    name: {{ .Release.Name }}-admission-controller

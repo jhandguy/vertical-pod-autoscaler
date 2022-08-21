@@ -1,0 +1,62 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-recommender
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.recommender.replicas }}
+  selector:
+    matchLabels:
+      app: recommender
+  template:
+    metadata:
+      labels:
+        app: recommender
+    spec:
+      serviceAccountName: {{ .Release.Name }}-recommender
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+      containers:
+        - name: recommender
+          {{- with .Values.recommender }}
+          image: "k8s.gcr.io/autoscaling/vpa-recommender:{{ $.Chart.AppVersion }}"
+          imagePullPolicy: Always
+          args:
+            - --address=:9090
+            {{- range $key, $value := .extraArgs }}
+            - --{{ $key }}={{ $value }}
+            {{- end }}
+          ports:
+            - name: metrics
+              protocol: TCP
+              containerPort: 9090
+          resources:
+            {{- with .resources }}
+            requests:
+              memory: {{ .requests.memory }}
+              cpu: {{ .requests.cpu }}
+            limits:
+              memory: {{ .limits.memory }}
+              cpu: {{ .limits.cpu }}
+            {{- end }}
+          startupProbe:
+            httpGet:
+              path: /health-check
+              port: metrics
+              scheme: HTTP
+            periodSeconds: 1
+            failureThreshold: 120
+          readinessProbe:
+            httpGet:
+              path: /health-check
+              port: metrics
+              scheme: HTTP
+            periodSeconds: 1
+          livenessProbe:
+            httpGet:
+              path: /health-check
+              port: metrics
+              scheme: HTTP
+          {{- end }}

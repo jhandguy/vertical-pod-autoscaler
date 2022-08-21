@@ -1,0 +1,40 @@
+admissionController:
+  replicas: 1
+  resources:
+    limits:
+      cpu: 200m
+      memory: 500Mi
+    requests:
+      cpu: 50m
+      memory: 200Mi
+  extraArgs:
+recommender:
+  replicas: 1
+  resources:
+    limits:
+      cpu: 200m
+      memory: 1000Mi
+    requests:
+      cpu: 50m
+      memory: 500Mi
+  extraArgs:
+    recommendation-margin-fraction: 0
+    pod-recommendation-min-cpu-millicores: 10
+    pod-recommendation-min-memory-mb: 20
+    memory-aggregation-interval: 1m
+    memory-aggregation-interval-count: 1
+    memory-histogram-decay-half-life: 1m
+    cpu-histogram-decay-half-life: 1m
+updater:
+  replicas: 1
+  resources:
+    limits:
+      cpu: 200m
+      memory: 1000Mi
+    requests:
+      cpu: 50m
+      memory: 500Mi
+  extraArgs:
+    updater-interval: 10s
+    min-replicas: 1
+    eviction-tolerance: 1
