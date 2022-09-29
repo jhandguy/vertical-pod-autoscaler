@@ -25,8 +25,6 @@ helm install metrics-server/metrics-server --name-template metrics-server --crea
 helm install helm-chart --name-template vertical-pod-autoscaler --create-namespace -n vertical-pod-autoscaler --wait
 
 helm install sample-app/helm-chart --name-template sample-app --create-namespace -n sample-app --wait
-
-kind delete cluster
 ```
 
 ### Autoscaling with Pod Disruption Budget
@@ -46,8 +44,6 @@ helm install metrics-server/metrics-server --name-template metrics-server --crea
 helm install helm-chart --name-template vertical-pod-autoscaler --create-namespace -n vertical-pod-autoscaler --wait
 
 helm install sample-app/helm-chart --name-template sample-app --set podDisruptionBudget.enabled=true --create-namespace -n sample-app --wait
-
-kind delete cluster
 ```
 
 ## Smoke Testing
@@ -61,4 +57,10 @@ curl localhost/error -H "Host: sample.app" -v
 
 ```shell
 k6 run k6/script.js
+```
+
+## Uninstalling
+
+```shell
+kind delete cluster
 ```
