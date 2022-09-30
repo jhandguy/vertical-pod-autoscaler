@@ -69,3 +69,7 @@ spec:
               path: /monitoring/health
               port: 8080
               scheme: HTTP
+          lifecycle:
+            preStop:
+              exec:
+                command: ["sh", "-c", "sleep 1"]
