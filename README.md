@@ -4,7 +4,7 @@ A sample project showcasing the implementation of Vertical Pod Autoscaler.
 
 ## Blog Post
 
-> Coming soon!
+- [Vertical Pod Autoscaler in Kubernetes](https://jhandguy.github.io/posts/vertical-pod-autoscaler/)
 
 ## Installing
 
