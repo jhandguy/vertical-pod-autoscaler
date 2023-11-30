@@ -23,7 +23,7 @@ spec:
       containers:
         - name: admission-controller
           {{- with .Values.admissionController }}
-          image: "k8s.gcr.io/autoscaling/vpa-admission-controller:{{ $.Chart.AppVersion }}"
+          image: "registry.k8s.io/autoscaling/vpa-admission-controller:{{ $.Chart.AppVersion }}"
           imagePullPolicy: Always
           args:
             - --port=8080

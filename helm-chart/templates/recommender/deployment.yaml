@@ -21,7 +21,7 @@ spec:
       containers:
         - name: recommender
           {{- with .Values.recommender }}
-          image: "k8s.gcr.io/autoscaling/vpa-recommender:{{ $.Chart.AppVersion }}"
+          image: "registry.k8s.io/autoscaling/vpa-recommender:{{ $.Chart.AppVersion }}"
           imagePullPolicy: Always
           args:
             - --address=:9090
