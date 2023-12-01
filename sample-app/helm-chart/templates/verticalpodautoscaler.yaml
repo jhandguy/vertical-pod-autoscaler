@@ -27,3 +27,4 @@ spec:
           memory: {{ .memory }}
         {{- end }}
         {{- end }}
+        mode: Auto

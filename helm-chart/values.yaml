@@ -19,6 +19,7 @@ recommender:
       memory: 500Mi
   extraArgs:
     recommendation-margin-fraction: 0
+    recommender-interval: 30s
     pod-recommendation-min-cpu-millicores: 10
     pod-recommendation-min-memory-mb: 20
     memory-aggregation-interval: 1m
@@ -35,6 +36,6 @@ updater:
       cpu: 50m
       memory: 500Mi
   extraArgs:
-    updater-interval: 10s
+    updater-interval: 2m
     min-replicas: 1
     eviction-tolerance: 1
