@@ -21,8 +21,6 @@ spec:
           env:
             - name: HTTP_PORT
               value: "8080"
-            - name: METRICS_PORT
-              value: "9090"
             - name: KUBERNETES_NODE
               valueFrom:
                 fieldRef:
@@ -39,9 +37,6 @@ spec:
             - name: http
               protocol: TCP
               containerPort: 8080
-            - name: metrics
-              protocol: TCP
-              containerPort: 9090
           resources:
             {{- with .Values.resources }}
             requests:
